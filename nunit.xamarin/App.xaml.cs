@@ -20,6 +20,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
+using System;
 using System.Reflection;
 
 using NUnit.Runner.Services;
@@ -42,6 +43,8 @@ namespace NUnit.Runner
         public App()
         {
             InitializeComponent();
+
+            RealConsole.Init(Console.Out);
 
             // OnPlatform only reports WinPhone for WinPhone Silverlight, so swap
             // out the background color in code instead

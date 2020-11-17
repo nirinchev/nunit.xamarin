@@ -22,9 +22,9 @@
 // ***********************************************************************
 
 using NUnit.Framework.Interfaces;
-using Xamarin.Forms;
-using System.Collections.Generic;
 using System.Linq;
+
+using XFColor = Xamarin.Forms.Color;
 
 namespace NUnit.Runner.Extensions
 {
@@ -35,23 +35,23 @@ namespace NUnit.Runner.Extensions
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
-        public static Color Color(this ResultState result)
+        public static XFColor Color(this ResultState result)
         {
             switch (result.Status)
             {
                 case TestStatus.Passed:
-                    return Xamarin.Forms.Color.Green;
+                    return XFColor.Green;
                 case TestStatus.Skipped:
-                    return Xamarin.Forms.Color.FromRgb(206, 172, 0);    // Dark Yellow
+                    return XFColor.FromRgb(206, 172, 0);    // Dark Yellow
                 case TestStatus.Failed:
                     if (result == ResultState.Failure)
-                        return Xamarin.Forms.Color.Red;
+                        return XFColor.Red;
                     if (result == ResultState.NotRunnable)
-                        return Xamarin.Forms.Color.FromRgb(255, 106, 0);  // Orange
+                        return XFColor.FromRgb(255, 106, 0);  // Orange
 
-                    return Xamarin.Forms.Color.FromRgb(170, 0, 0); // Dark Red
+                    return XFColor.FromRgb(170, 0, 0); // Dark Red
                 default:
-                    return Xamarin.Forms.Color.Gray;
+                    return XFColor.Gray;
             }
         }
 

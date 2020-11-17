@@ -21,9 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -94,7 +92,7 @@ namespace NUnit.Runner.Helpers
         {
             var total = result.FailCount + result.PassCount + result.InconclusiveCount;
             var message = $"Tests run: {total} Passed: {result.PassCount} Failed: {result.FailCount} Inconclusive: {result.InconclusiveCount}";
-            Console.WriteLine(message);
+            RealConsole.WriteLine(message);
         }
 
         private class CustomTestListener : ITestListener
@@ -110,7 +108,8 @@ namespace NUnit.Runner.Helpers
                     var className = result.Test.ClassName?.Split('.').LastOrDefault();
                     var status = result.ResultState.Status.ToString().ToUpper();
                     var message = $"\t[{status}] {className}.{result.Test.Name}";
-                    Console.WriteLine(message);
+
+                    RealConsole.WriteLine(message);
                 }
             }
 

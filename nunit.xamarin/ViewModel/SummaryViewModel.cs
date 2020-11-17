@@ -182,7 +182,7 @@ namespace NUnit.Runner.ViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                RealConsole.WriteLine(ex.Message);
             }
             finally
             {

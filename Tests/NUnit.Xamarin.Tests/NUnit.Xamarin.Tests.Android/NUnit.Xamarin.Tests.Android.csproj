@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -94,7 +93,7 @@
       <Name>NUnit.Xamarin</Name>
     </ProjectReference>
     <ProjectReference Include="..\NUnit.Xamarin.Tests\NUnit.Xamarin.Tests.csproj">
-      <Project>{2A96E734-05DC-492B-9C12-77DEE982FA64}</Project>
+      <Project>{040DA56C-199F-4F4C-94AF-01B945A283B5}</Project>
       <Name>NUnit.Xamarin.Tests</Name>
     </ProjectReference>
   </ItemGroup>

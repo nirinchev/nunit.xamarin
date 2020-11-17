@@ -123,14 +123,18 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.1141" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\NUnit.Xamarin.Tests\NUnit.Xamarin.Tests.csproj">
-      <Project>{2A96E734-05DC-492B-9C12-77DEE982FA64}</Project>
+      <Project>{040DA56C-199F-4F4C-94AF-01B945A283B5}</Project>
       <Name>NUnit.Xamarin.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NUnit.Xamarin\NUnit.Xamarin.csproj">
+      <Project>{3A1ECDAE-A835-414B-AB0C-B30502CEF427}</Project>
+      <Name>NUnit.Xamarin</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

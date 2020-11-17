@@ -44,7 +44,7 @@ namespace NUnit.Runner.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Fatal error while trying to write xml result file! " + ex.Message);
+                RealConsole.WriteLine("Fatal error while trying to write xml result file! " + ex.Message);
                 throw;
             }
 
