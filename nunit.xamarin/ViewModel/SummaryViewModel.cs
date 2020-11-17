@@ -166,14 +166,11 @@ namespace NUnit.Runner.ViewModel
                 Results = null;
                 var results = await _testPackage.ExecuteTests();
                 var summary = await _testPackage.ProcessResults(results);
-                Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    Options.OnCompletedCallback?.Invoke();
-
-                    if (Options.TerminateAfterExecution)
+                    if (Options.OnCompletedCallback != null)
                     {
-                        TerminateWithSuccess();
-                        return;
+                        await Options.OnCompletedCallback();
                     }
 
                     Results = summary;
@@ -189,18 +186,6 @@ namespace NUnit.Runner.ViewModel
                 Running = false;
             }
 
-        }
-
-        private static void TerminateWithSuccess()
-        {
-#if __IOS__
-            var selector = new ObjCRuntime.Selector("terminateWithSuccess");
-            UIKit.UIApplication.SharedApplication.PerformSelector(selector, UIKit.UIApplication.SharedApplication, 0);
-#elif __DROID__
-            System.Environment.Exit(0);
-#elif WINDOWS_UWP
-            Windows.UI.Xaml.Application.Current.Exit();
-#endif
         }
     }
 }

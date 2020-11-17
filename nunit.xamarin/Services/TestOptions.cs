@@ -23,6 +23,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace NUnit.Runner.Services
 {
@@ -48,14 +49,9 @@ namespace NUnit.Runner.Services
         public bool AutoRun { get; set; }
 
         /// <summary>
-        /// If True, the application will terminate automatically after running the tests.
-        /// </summary>
-        public bool TerminateAfterExecution { get; set; }
-
-        /// <summary>
         /// Gets or sets the callback that will be called after running the tests.
         /// </summary>
-        public Action OnCompletedCallback { get; set; }
+        public Func<Task> OnCompletedCallback { get; set; }
 
         /// <summary>
         /// Information about the tcp listener host and port.

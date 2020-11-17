@@ -1,7 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using NUnit.Runner.Services;
 using NUnit.Runner.Tests;
+using Windows.ApplicationModel;
+using Windows.Data.Xml.Dom;
+using Windows.Data.Xml.Xsl;
 using Windows.Storage;
 
 namespace NUnit.Xamarin.Tests.UWP
@@ -17,6 +21,8 @@ namespace NUnit.Xamarin.Tests.UWP
             // If you want to add tests in another assembly, add a reference and
             // duplicate the following line with a type from the referenced assembly
             nunit.AddTestAssembly(typeof(AsyncTests).GetTypeInfo().Assembly);
+
+            var resultsPath = Path.Combine(ApplicationData.Current.TemporaryFolder.Path, "Nunit", "Results.xml");
 
             // Available options for testing
             nunit.Options = new TestOptions
@@ -37,7 +43,21 @@ namespace NUnit.Xamarin.Tests.UWP
                 CreateXmlResultFile = true,
 
                 // Choose a different path for the xml result file
-                ResultFilePath = Path.Combine(ApplicationData.Current.TemporaryFolder.Path, "Nunit", "Results.xml"),
+                ResultFilePath = resultsPath,
+
+                OnCompletedCallback = async () =>
+                {
+                    var resultFile = await StorageFile.GetFileFromPathAsync(resultsPath);
+                    var doc = await XmlDocument.LoadFromFileAsync(resultFile);
+
+                    var transformFile = Path.Combine(Package.Current.InstalledLocation.Path, "nunit3-junit.xslt");
+                    var xslt = await StorageFile.GetFileFromPathAsync(transformFile);
+                    var xsltDoc = await XmlDocument.LoadFromFileAsync(xslt);
+
+                    var processor = new XsltProcessor(xsltDoc);
+                    var transformed = processor.TransformToDocument(doc.FirstChild);
+                    await transformed.SaveToFileAsync(resultFile);
+                }
             };
 
             LoadApplication(nunit);
