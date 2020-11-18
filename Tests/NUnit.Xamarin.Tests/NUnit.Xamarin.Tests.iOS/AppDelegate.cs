@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Foundation;
 using NUnit.Runner.Services;
 using NUnit.Runner.Tests;
@@ -38,6 +39,8 @@ namespace NUnit.Xamarin.Tests.iOS
                 {
                     // var selector = new ObjCRuntime.Selector("terminateWithSuccess");
                     // UIApplication.SharedApplication.PerformSelector(selector, UIKit.UIApplication.SharedApplication, 0);
+
+                    return Task.FromResult(true);
                 }
             };
 
