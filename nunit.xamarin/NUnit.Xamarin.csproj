@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>NUnit.Xamarin.Realm</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.12.0</Version>
+    <Version>3.12.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
