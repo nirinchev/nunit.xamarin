@@ -1,0 +1,27 @@
+name: .NET
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: main
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore nunit.xamarin
+    - name: Package
+      run: dotnet publish nunit.xamarin --no-restore -c Release
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: NUnit.Xamarin.Realm.nupkg
+        path: nunit.xamarin/bin/Release/netstandard2.0/publish/*.nupkg
