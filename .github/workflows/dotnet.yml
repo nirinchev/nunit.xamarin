@@ -23,5 +23,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2.2.4
       with:
-        name: NUnit.Xamarin.Realm.nupkg
+        name: package
         path: nunit.xamarin/bin/Release/*.nupkg
