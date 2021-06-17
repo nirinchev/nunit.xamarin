@@ -21,6 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -91,7 +92,7 @@ namespace NUnit.Runner.Helpers
         private static void LogTestRun(ITestResult result)
         {
             var total = result.FailCount + result.PassCount + result.InconclusiveCount;
-            var message = $"Tests run: {total} Passed: {result.PassCount} Failed: {result.FailCount} Inconclusive: {result.InconclusiveCount}";
+            var message = $"Test run finished: {total} Passed: {result.PassCount} Failed: {result.FailCount} ({result.EndTime - result.StartTime:c})";
             RealConsole.WriteLine(message);
         }
 
@@ -107,7 +108,13 @@ namespace NUnit.Runner.Helpers
                 {
                     var className = result.Test.ClassName?.Split('.').LastOrDefault();
                     var status = result.ResultState.Status.ToString().ToUpper();
-                    var message = $"\t[{status}] {className}.{result.Test.Name}";
+
+                    var message = $"\t[{status}] {className}.{result.Test.Name} ({(result.EndTime - result.StartTime).TotalMilliseconds} ms)";
+
+                    if (result.ResultState.Status == TestStatus.Failed)
+                    {
+                        message += $"\t\t{Environment.NewLine}{result.Message} - {result.StackTrace}";
+                    }
 
                     RealConsole.WriteLine(message);
                 }
